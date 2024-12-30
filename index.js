@@ -60,7 +60,7 @@ app.post('/api/persons', (request, response) => {
 
   response.json(newPerson)
 })
-
+//3.3 haku id:n pohjalta.käytetty 404-statusta jos ei löydy
 app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   const person = persons.find(person => Number(person.id) === id)
