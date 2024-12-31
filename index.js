@@ -50,6 +50,13 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
+  const nameExists = persons.some(person => person.name === body.name);
+  if (nameExists) {
+    return response.status(400).json({
+      error: 'name must be unique',
+    });
+  }
+
   const newPerson = {
     name: body.name,
     number: body.number,
@@ -83,7 +90,7 @@ app.get('/info', (request, response) => {
       </div>
     `);
   });
-
+//3.4. delete pyyntö. käytetty 204-statusta kun henkilöä ei enää löydy
 app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   persons = persons.filter(person => Number(person.id) !== id)
